@@ -1,0 +1,109 @@
+/* _____RESET_____ */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot { margin: 0; padding: 0; border: 0; outline: 0; }
+table, tr, th, td { margin: 0; padding: 0; outline: 0; font-size: 100%; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+:focus { outline: 0; }
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+table { border-collapse: collapse; border-spacing: 0; }
+a img { border: 0px; }
+small { font-size: 11px; line-height:15px; } 
+img { -ms-interpolation-mode: bicubic; } /* IE will rander html resized images decent */
+
+.clear { clear:both; display:block; overflow:hidden; visibility:hidden; width:0; height:0; }
+.clearfix { display:inline-block; display:block; }
+.clearfix:after { clear:both; content:' '; display:block; font-size:0; line-height:0; visibility:hidden; width:0; height:0; }
+* html .clearfix, *:first-child+html .clearfix { zoom:1 }
+
+/* ___END_RESET___ */
+
+
+/* ___GOLDY___ */
+
+#bWinbanner { width:320px; height:50px; position:absolute; top:0; left:0; overflow: hidden; }
+#bWincontainer { width:100%; height:100%; position:absolute; top:0; left:0; }
+#bWinoutput { position:absolute; top:0; left:0; }
+#bWreport { position:absolute;z-index:100;  }
+
+/* ___END_GOLDY___ */
+
+
+
+.banner { width:320px; height: 50px; margin:0px; position: relative; overflow: hidden; }
+.banner:before { content: ''; display: block; position: absolute; top:0px; left:0px; width:320px; height: 50px; background: #303030; animation: yellowin 250ms linear forwards 1s; -webkit-animation: yellowin 250ms linear forwards 1s; z-index:7; }
+.banner.no-fade:before { display:none; }
+
+@keyframes yellowin {
+    0% { opacity:1; }
+    100% { opacity:0; }
+}
+
+@-webkit-keyframes yellowin {
+    0% { opacity:1; }
+    100% { opacity:0; }
+}
+
+body * { font-family: 'Roboto Condensed', sans-serif; }
+
+#logo { width:60px; height:28px; top:50%; margin-top:-14.5px; background: #000 url('https://ma.itsfogo.com/bw/bann/SmartOdds_banners/core/img/bwin_neutral_negative_free_rgb.svg') center center no-repeat; background-size: 52px auto; position: absolute; z-index: 5; }
+
+#background { width:100%; height:100%; z-index: 1; }
+
+#scroll { width:60%; position: absolute; bottom: -4px; margin-left:20%; z-index: 6; }
+#scroll { height: 20px; background:transparent; } 
+#scroll > div { height: 0px; background:transparent; }
+#scroll > div { width:0%; }
+#scroll > div em { display:block; width: 10px; height: 10px; margin-right:-6px; margin-top:5px; box-shadow: 0px 0px 2px 5px rgba(200,100,0,0.9); background: rgba(255,120,0,0.9); float:right; cursor:ew-resize; border-radius: 50%; }
+#scroll > i { display: block; width:100%; height:2px; background: #f90; margin-top: 9px; box-shadow: 0px 0px 1px 1px rgba(255,255,0,1); border-radius: 2px; }
+
+#text { z-index: 7; height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; }
+#text > div { width:100%; height: 100%; line-height: 50px; text-align: center; margin: 1px; opacity: 0; font-family: 'Roboto Condensed', sans-serif; font-size: 28px; font-weight: 700; z-index: 8; position: absolute; top: -1px; left: 0px; }
+
+#text .big { font-size:36px; }
+#text .medium { font-size:30px; }
+#text .small { font-size:26px; }
+
+#text small { display:block; width: 96%; font-size: 18px; line-height: 18px; margin-top:5px; }
+
+#area { width:200px; height:200px; border:1px solid #000; position:relative; margin:10px auto; }
+#bullet { display:none; width:10px; height:10px; border-radius:5px; background:#000; position:absolute; margin-top:-5px; margin-left:-5px; }
+
+#container { width:150%; height:150%; position:absolute; top:-25%; left:-25%; }
+
+#legal { position: absolute; bottom: 1px; right: 1px; font-size: 8px; font-family: 'Roboto Condensed', sans-serif; font-weight: 400; color: #392f00; }
+
+/* http://ma.itsfogo.com/bw/assets/logos/bwin_neutral.svg */
+.first-frame { background:url('https://ma.itsfogo.com/bw/bann/SmartOdds_banners/core/img/bwin_black.png') center center no-repeat; background-size: cover; width: 100%; height: 100%; margin-left: -1.5px; }
+.cta { width:66px; height:24px; padding-top:3px; line-height: 11px; font-size: 12px; font-weight: 400; background: #000; color:#fff; text-transform: uppercase; cursor:pointer; position: absolute; top:50%; margin-top:-14.5px; right:10px; }
+
+.zoom-animation {
+    animation: zoominfx 125ms linear forwards;
+    -webkit-animation: zoominfx 125ms linear forwards;
+}
+@-webkit-keyframes zoominfx {
+    0% { -webkit-transform: scale(3,3); top:-1px; left: 0px; opacity: 0; }
+    100% { -webkit-transform: scale(1,1); top:-1px; left: 0px; opacity: 1; }
+}
+@keyframes zoominfx {
+    0% { transform: scale(3,3); top:-1px; left: 0px; opacity: 0; }
+    100% { transform: scale(1,1); top:-1px; left: 0px; opacity: 1; }
+}
+
+
+.blur-animation {
+    animation: blurinfx 80ms ease-in forwards;
+    -webkit-animation: blurinfx 80ms ease-in forwards;
+}
+@-webkit-keyframes blurinfx {
+    0% { -webkit-filter: blur(50px); -webkit-transform: scale(1.4,0.5); opacity: 0; text-shadow: 25px 0px 5px #333, -25px 0px 5px #333; color:rgba(0,0,0,0.0); }
+    100% { -webkit-filter: blur(0px); -webkit-transform: scale(1,1); opacity: 1; text-shadow: 0px 0px 0px #000; color:rgba(0,0,0,1); }
+}
+@keyframes blurinfx {
+    0% { filter: blur(50px); transform: scale(1.4,0.5); opacity: 0; text-shadow: 25px 0px 5px #333, -25px 0px 5px #333; color:rgba(0,0,0,0.0); }
+    100% { filter: blur(0px); transform: scale(1,1); opacity: 1; text-shadow: 0px 0px 0px #000; color:rgba(0,0,0,1); }
+}
+

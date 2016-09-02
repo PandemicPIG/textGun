@@ -1,0 +1,133 @@
+ 
+    /********
+        
+    HOW TO USE
+
+    # - brakes the text into slides
+    /# - for using the '#' character and not braking the text
+    {2.33} - multiply the show time of the slide by 2.33 - !!! individual element “{float.number}”, do not mix with the variable element “{$var}” !!!
+    {$var} - adds the data from the variable "var"
+    {stop $html} - adds the data from the variable "html" after scrolling stops on the slide - after default time
+    {stop $html $2.5} - adds the data from the variable "html" after scrolling stops on the slide - after 2.5 seconds
+    {stop $html $2-3} - adds the data from the variable "html" also on the previous 2 slides and on the next 3
+    {stop $html $2.5 $2-3} - adds the data from the variable "html" also on the previous 2 slides and on the next 3 - after 2.5 seconds
+    
+    exemple: 'This is #as true as it is# a long {$face}{2.33} # with text. #And if# you# click on{1.5}# {$button} {3} {stop $odds_data_2 $2-3}# you win#{10} {$value} €{stop $odds_data_1 $1 $1-2}# Do not# press{2}# the red {$face}{0.5}# before# {$OTHER_VAR}.'
+
+    ********/
+    // load bannerflow feed (one game or multiple games) - requires feed.js file
+    var feed = fetchFeed('http://b1host.blob.core.windows.net/bwin-feeds/20004.json',0, true); // feed_path | game_nr_in_feed (for multiple gamers feed)| best_team_first (shows first the team with higher chance of winning)
+    
+    // creates the machine gun banner - requires textgun.js file
+    weapon = new Machine_gun({
+        global_string:'#{$step_one}{0.7} #Discover {0.5} #a{5} #world #of {2} #excitment {0.5} #at {2} #bwin. {2}#Get #this #odds #{$team_1}: {$odds_team_1} #to #beat #{$team_2}. #<small>{$team_1}: {$odds_team_1}<br />to beat {$team_2}</small>{$button} {0.3}',
+        id:'text',
+        vars:{
+            team_1:feed.team_short_1,
+            team_2:feed.team_short_2,
+            odds_team_1:feed.odds_1,
+            odds_team_x:feed.odds_x,
+            odds_team_2:feed.odds_2,
+            step_one:'<div class="first-frame"></div>',
+            button:'<div class="cta" style="line-height:23px;">Bet now!</div>'
+        },
+        no_data:'???',
+        ms_per_letter:120, // miliseconds to show slide for each letter
+        min_ms_per_show:300, // minimul number of milisecods to show the slider
+        scroll_enable: false, // create slider
+        scroll_id:'scroll', // id of scroll element
+        scroll_count:0, // times the scroll will run ( set 0 for infinite )
+        show_scroll_after:0, // after what run to show the scroll and stop ( 0 for last frame )
+        scroll_end_stop:0, // position to stop after last run
+        scroll_stop_delay: 2, // default delay until showing odds data
+        back_time:500, // time for the backwords run at the end
+        scroll_tranz:100, // tranzision between slides
+        animation_type: 'zoom-animation', //the css animation used
+        animation_exceptions: {
+            exception_frame_2:'blur-animation',
+            exception_frame_4:'blur-animation',
+            exception_frame_6:'blur-animation',
+            exception_frame_8:'blur-animation'
+        }
+    },false,true); // show logs | running
+    
+
+    /********
+    
+    basic html setup setup - don’t forget to load the script and the css file :)
+
+	<div class="banner">
+            <div id="container" class="container">
+                <div id="output" class="container"></div>
+            </div>
+            <div id="logo"></div>
+            <div id="text"></div>
+            <div id="scroll"></div>
+        </div>
+    
+    ********/
+
+    /********
+
+    basic css setup
+
+	.banner { width:320px; height: 50px; margin:0px; position: relative; overflow: hidden; }
+	.banner:before { content: ''; display: block; position: absolute; top:0px; left:0px; width:320px; height: 50px; background: #303030; animation: yellowin 250ms linear forwards 1s; -webkit-animation: yellowin 250ms linear forwards 1s; z-index:7; }
+	.banner.no-fade:before { display:none; }
+
+	@keyframes yellowin {
+	    0% { opacity:1; }
+	    100% { opacity:0; }
+	}
+
+	@-webkit-keyframes yellowin {
+	    0% { opacity:1; }
+	    100% { opacity:0; }
+	}
+
+	body * { font-family: 'Roboto Condensed', sans-serif; }
+
+	#logo { width:60px; height:28px; top:50%; margin-top:-14.5px; background: #000 url('https://ma.itsfogo.com/bw/bann/SmartOdds_banners/core/img/bwin_neutral_negative_free_rgb.svg') center center no-repeat; background-size: 52px auto; position: absolute; z-index: 5; }
+
+	#background { width:100%; height:100%; z-index: 1; }
+
+	#scroll { width:60%; position: absolute; bottom: -4px; margin-left:20%; z-index: 6; }
+	#scroll { height: 20px; background:transparent; } 
+	#scroll > div { height: 0px; background:transparent; }
+	#scroll > div { width:0%; }
+	#scroll > div em { display:block; width: 10px; height: 10px; margin-right:-6px; margin-top:5px; box-shadow: 0px 0px 2px 5px rgba(200,100,0,0.9); background: rgba(255,120,0,0.9); float:right; cursor:ew-resize; border-radius: 50%; }
+	#scroll > i { display: block; width:100%; height:2px; background: #f90; margin-top: 9px; box-shadow: 0px 0px 1px 1px rgba(255,255,0,1); border-radius: 2px; }
+
+	#text { z-index: 7; height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; }
+	#text > div { width:100%; height: 100%; line-height: 50px; text-align: center; margin: 1px; opacity: 0; font-family: 'Roboto Condensed', sans-serif; font-size: 28px; font-weight: 700; z-index: 8; position: absolute; top: -1px; left: 0px; }
+
+	#text .big { font-size:36px; }
+	#text .medium { font-size:30px; }
+	#text .small { font-size:26px; }
+
+	#text small { display:block; width: 96%; font-size: 18px; line-height: 18px; margin-top:5px; }
+
+	#area { width:200px; height:200px; border:1px solid #000; position:relative; margin:10px auto; }
+	#bullet { display:none; width:10px; height:10px; border-radius:5px; background:#000; position:absolute; margin-top:-5px; margin-left:-5px; }
+
+	#container { width:150%; height:150%; position:absolute; top:-25%; left:-25%; }
+
+	#legal { position: absolute; bottom: 1px; right: 1px; font-size: 8px; font-family: 'Roboto Condensed', sans-serif; font-weight: 400; color: #392f00; }
+
+	.first-frame { background:url('https://ma.itsfogo.com/bw/bann/SmartOdds_banners/core/img/bwin_black.png') center center no-repeat; background-size: cover; width: 100%; height: 100%; margin-left: -1.5px; }
+	.cta { width:66px; height:24px; padding-top:3px; line-height: 11px; font-size: 12px; font-weight: 400; background: #000; color:#fff; text-transform: uppercase; cursor:pointer; position: absolute; top:50%; margin-top:-14.5px; right:10px; }
+
+	.zoom-animation {
+	    animation: zoominfx 125ms linear forwards;
+	    -webkit-animation: zoominfx 125ms linear forwards;
+	}
+	@-webkit-keyframes zoominfx {
+	    0% { -webkit-transform: scale(3,3); top:-1px; left: 0px; opacity: 0; }
+	    100% { -webkit-transform: scale(1,1); top:-1px; left: 0px; opacity: 1; }
+	}
+	@keyframes zoominfx {
+	    0% { transform: scale(3,3); top:-1px; left: 0px; opacity: 0; }
+	    100% { transform: scale(1,1); top:-1px; left: 0px; opacity: 1; }
+	}
+
+    ********/
